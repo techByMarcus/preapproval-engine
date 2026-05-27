@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgia Pre-Approval Eligibility Engine | Marcus Albright</title>
+  <!-- Modern Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #003366; /* Trust-oriented deep blue */
+      --primary-hover: #002244;
+      --accent: #0056b3;
+      --accent-light: #f0f7ff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --border: #cbd5e1;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --success: #16a34a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 1rem;
+    }
+
+    /* Top Compliance Branding Header */
+    .compliance-header {
+      max-width: 550px;
+      margin: 1rem auto 0.5rem auto;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Main Container */
+    .wizard-container {
+      max-width: 550px;
+      margin: 0 auto 2rem auto;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Progress Tracker Bar */
+    .progress-container {
+      background-color: #e2e8f0;
+      height: 6px;
+      width: 100%;
+      position: relative;
+    }
+
+    .progress-bar {
+      background-color: var(--accent);
+      height: 100%;
+      width: 25%;
+      transition: width 0.3s ease-in-out;
+    }
+
+    /* Card Layout Spaces */
+    .wizard-body {
+      padding: 2.25rem;
+    }
+
+    .wizard-step {
+      display: none;
+    }
+
+    .wizard-step.active {
+      display: block;
+      animation: stepFade 0.4s ease-in-out forwards;
+    }
+
+    @keyframes stepFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Titles & Headings */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 1.75rem;
+    }
+
+    /* Interactive Selector Tiles */
+    .tile-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tile-option {
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.2s ease;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .tile-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+    }
+
+    .tile-option:hover {
+      border-color: var(--accent);
+      background-color: var(--accent-light);
+    }
+
+    .tile-option.selected {
+      border-color: var(--accent);
+      background-color: var(--accent-light);
+      color: var(--primary);
+    }
+
+    /* Educational Note Feature */
+    .info-box {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #78350f;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    /* Numeric Inputs and Fields */
+    .input-wrapper {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .field-hint {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .input-container {
+      position: relative;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    input[type="number"], select, input[type="text"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    select, input[type="text"], input[type="email"], input[type="tel"] {
+      padding-left: 1rem;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Navigation Action Buttons */
+    .footer-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.85rem 1.75rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--white);
+      flex: 2;
+    }
+
+    .btn-primary:hover {
+      background-color: #004494;
+    }
+
+    .btn-secondary {
+      background-color: #e2e8f0;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .btn-secondary:hover {
+      background-color: #cbd5e1;
+    }
+
+    .btn-full-app {
+      background-color: var(--success);
+      color: var(--white);
+      text-decoration: none;
+      width: 100%;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .btn-full-app:hover {
+      background-color: #15803d;
+    }
+
+    /* Interactive Output Layout */
+    .results-display {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px dashed var(--border);
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .result-val {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .compliance-footer {
+      max-width: 550px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Compliance Row -->
+  <div class="compliance-header">
+    Marcus Albright, Senior Loan Officer | NMLS #1503465 | Loan Factory NMLS #320841
+  </div>
+
+  <div class="wizard-container">
+    <!-- Active Progress Bar Component -->
+    <div class="progress-container">
+      <div class="progress-bar" id="wizard-progress"></div>
+    </div>
+
+    <form id="preapp-engine" onsubmit="return false;">
+      <div class="wizard-body">
+        
+        <!-- STEP 1: Employment Architecture -->
+        <div class="wizard-step active" data-step="1">
+          <h2>Verify Your Income Structure</h2>
+          <p class="step-desc">How is your baseline qualifying revenue collected?</p>
+          
+          <div class="tile-group">
+            <label class="tile-option id-tile">
+              <input type="radio" name="employment_type" value="w2" checked>
+              <span>Standard W-2 Employee</span>
+            </label>
+            <label class="tile-option id-tile">
+              <input type="radio" name="employment_type" value="self">
+              <span>Self-Employed / 1099 Business Owner</span>
+            </label>
+          </div>
+          
+          <div class="info-box" id="self-employed-note">
+            <strong>Pro-Tip for Business Owners:</strong> Our framework reverse-calculates eligibility utilizing net cash flow strategies (like bank statement verification) instead of penalizing tax-write offs.
+          </div>
+
+          <div class="footer-actions">
+            <button type="button" class="btn btn-primary next-step">Start Calculation</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Core Financial Architecture -->
+        <div class="wizard-step" data-step="2">
+          <h2>Estimate Your Baseline Profile</h2>
+          <p class="step-desc">Provide your estimated monthly volume to compute limits.</p>
+          
+          <div class="input-wrapper">
+            <label for="monthly_income" id="income-label">Gross Monthly Income</label>
+            <p class="field-hint" id="income-hint">Total monthly earnings before taxes are pulled.</p>
+            <div class="input-container">
+              <span class="input-prefix">$</span>
+              <input type="number" id="monthly_income" placeholder="6500" required min="1000">
+            </div>
+          </div>
+
+          <div class="input-wrapper">
+            <label for="monthly_debts">Total Monthly Liability Debts</label>
+            <p class="field-hint">Car notes, student loans, and minimum credit card balances (skip rent).</p>
+            <div class="input-container">
+              <span class="input-prefix">$</span>
+              <input type="number" id="monthly_debts" placeholder="450" required min="0">
+            </div>
+          </div>
+
+          <div class="footer-actions">
+            <button type="button" class="btn btn-secondary prev-step">Back</button>
+            <button type="button" class="btn btn-primary next-step">Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Geographic Context and Direct Lead Intake -->
+        <div class="wizard-step" data-step="3">
+          <h2>Localized Validation</h2>
+          <p class="step-desc">Where is your target property located inside Georgia?</p>
+          
+          <div class="input-wrapper">
+            <label for="ga_county">Georgia County</label>
+            <select id="ga_county">
+              <option value="Cobb">Cobb County</option>
+              <option value="Fulton">Fulton County</option>
+              <option value="Gwinnett">Gwinnett County</option>
+              <option value="Other">Other Georgia County</option>
+            </select>
+          </div>
+
+          <div class="input-wrapper">
+            <label for="borrower_name">Your Name</label>
+            <input type="text" id="borrower_name" placeholder="John Doe" required>
+          </div>
+
+          <div class="input-wrapper">
+            <label for="borrower_email">Email Address</label>
+            <input type="email" id="borrower_email" placeholder="john@example.com" required>
+          </div>
+
+          <div class="footer-actions">
+            <button type="button" class="btn btn-secondary prev-step">Back</button>
+            <button type="button" class="btn btn-primary" id="calculate-trigger">Generate Live Breakdown</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Live Automated Processing Output Screen -->
+        <div class="wizard-step" data-step="4">
+          <h2>Your Preliminary Framework</h2>
+          <p class="step-desc">Calculated tracking based on standard 45% DTI limits.</p>
+          
+          <div class="results-display">
+            <div class="result-row">
+              <span>Estimated Max Housing Budget (PITI):</span>
+              <span class="result-val" id="res-piti">$0/mo</span>
+            </div>
+            <div class="result-row">
+              <span>Estimated Purchase Power Range:</span>
+              <span class="result-val" id="res-power">$0 - $0</span>
+            </div>
+            <div class="result-row">
+              <span>2026 Loan Limit Status:</span>
+              <span class="result-val" id="res-limits" style="color: var(--success);">Within Conforming Bounds</span>
+            </div>
+          </div>
+
+          <p class="field-hint" style="text-align: center;">To turn this automated estimation into an official, seller-ready Pre-Approval Letter, click below to lock in your file for Marcus's 24-hour priority manual review.</p>
+          
+          <!-- Replace '#' with your direct Loan Factory application link -->
+          <a href="#" class="btn btn-full-app" id="final-cta">Secure Your 24-Hour Pre-Approval Letter</a>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <!-- Bottom Regulatory Verification -->
+  <div class="compliance-footer">
+    Equal Housing Lender | All calculations are preliminary profiles. Rates and official guidelines depend on comprehensive credit pull and desktop underwriter approvals.
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const steps = Array.from(document.querySelectorAll(".wizard-step"));
+      const progressBar = document.getElementById("wizard-progress");
+      let currentStepIndex = 0;
+
+      // Handle Tile Component State Selection Visuals
+      const tiles = document.querySelectorAll(".id-tile");
+      tiles.forEach(tile => {
+        tile.addEventListener("click", function() {
+          tiles.forEach(t => t.classList.remove("selected"));
+          this.classList.add("selected");
+          
+          const radio = this.querySelector('input[type="radio"]');
+          radio.checked = true;
+
+          // Toggle conditional tooltips dynamically
+          const selfNote = document.getElementById("self-employed-note");
+          const incomeLabel = document.getElementById("income-label");
+          const incomeHint = document.getElementById("income-hint");
+
+          if (radio.value === "self") {
+            selfNote.style.display = "block";
+            incomeLabel.textContent = "Estimated Net Monthly Revenue";
+            incomeHint.textContent = "Your average monthly cash flow deposits (minus operating overhead).";
+          } else {
+            selfNote.style.display = "none";
+            incomeLabel.textContent = "Gross Monthly Income";
+            incomeHint.textContent = "Total monthly earnings before taxes are pulled.";
+          }
+        });
+      });
+      // Initialize selected tile look
+      document.querySelector(".id-tile input:checked").parentElement.classList.add("selected");
+
+      // Progressive Navigation Rules
+      const nextButtons = document.querySelectorAll(".next-step");
+      const prevButtons = document.querySelectorAll(".prev-step");
+
+      function updateUI() {
+        steps.forEach((step, idx) => {
+          step.classList.toggle("active", idx === currentStepIndex);
+        });
+        const progressPercent = ((currentStepIndex + 1) / steps.length) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+      }
+
+      function validateCurrentStep() {
+        const activeFields = steps[currentStepIndex].querySelectorAll("input[required]");
+        let valid = true;
+        activeFields.forEach(field => {
+          if (!field.checkValidity()) {
+            field.reportValidity();
+            valid = false;
+          }
+        });
+        return valid;
+      }
+
+      nextButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (validateCurrentStep()) {
+            currentStepIndex++;
+            updateUI();
+          }
+        });
+      });
+
+      prevButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (currentStepIndex > 0) {
+            currentStepIndex--;
+            updateUI();
+          }
+        });
+      });
+
+      // Core Mathematical Logic Engine Execution
+      document.getElementById("calculate-trigger").addEventListener("click", () => {
+        if (!validateCurrentStep()) return;
+
+        const income = parseFloat(document.getElementById("monthly_income").value) || 0;
+        const debts = parseFloat(document.getElementById("monthly_debts").value) || 0;
+        
+        // 1. Calculate max qualifying PITI using standard 45% back-end DTI limit
+        const maxPITI = Math.max(0, (income * 0.45) - debts);
+        
+        // 2. Compute estimated reverse capitalization purchase thresholds
+        // Assuming current average 2026 interest landscape of 6.5%, standard property taxes and insurance allocations
+        const amortizationFactor = 0.0073; 
+        const estimatedMaxLoanAmount = maxPITI / amortizationFactor;
+        
+        // Assuming typical 5% baseline down payment allocation to reverse calculate listing scale
+        const estPurchaseBase = estimatedMaxLoanAmount / 0.95;
+        const lowerRange = Math.round(estPurchaseBase * 0.9);
+        const upperRange = Math.round(estPurchaseBase * 1.05);
+
+        // Render calculation fields safely to user layout
+        document.getElementById("res-piti").textContent = `$${Math.round(maxPITI).toLocaleString()}/mo`;
+        document.getElementById("res-power").textContent = `$${Math.round(lowerRange).toLocaleString()} - $${Math.round(upperRange).toLocaleString()}`;
+
+        // 3. Evaluate baseline alignment against federal 2026 Conforming limits ($832,750)
+        const limitDisplay = document.getElementById("res-limits");
+        if (estimatedMaxLoanAmount > 832_750) {
+          limitDisplay.textContent = "Jumbo Loan Category Required";
+          limitDisplay.style.color = "#b45309";
+        } else {
+          limitDisplay.textContent = "Conforming Limit Matches";
+          limitDisplay.style.color = "var(--success)";
+        }
+
+        // Advance layout position to results display screen
+        currentStepIndex = 3;
+        updateUI();
+
+        // Optional Form Param Transfer Configuration
+        const finalCta = document.getElementById("final-cta");
+        const baseAppUrl = "https://yourportal.loanfactory.com/apply"; // Update with actual portal destination
+        const name = encodeURIComponent(document.getElementById("borrower_name").value);
+        const email = encodeURIComponent(document.getElementById("borrower_email").value);
+        
+        finalCta.href = `${baseAppUrl}?name=${name}&email=${email}&income=${income}`;
+      });
+    });
+  </script>
+</body>
+</html>
