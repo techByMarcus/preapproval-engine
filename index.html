@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Personal Mortgage Review | Marcus Albright, Senior Loan Officer</title>
+  <title>Pre-Approval Eligibility Screen | Albright Loans</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --slate: #0f172a; /* Main Trust/Authority Color */
-      --slate-hover: #1e293b;
-      --light-slate: #f1f5f9;
-      --text: #334155;
-      --text-light: #64748b;
-      --border: #e2e8f0;
-      --white: #ffffff;
-      --success: #16a34a; /* Result Green */
-      --warning: #d97706; /* Jumbo Warning Amber */
+      --brand-navy: #0a192f;       /* Your exact deep background/header navy */
+      --brand-gold: #ff9f1c;       /* Your exact vibrant action gold/orange */
+      --brand-gold-hover: #e58a00;
+      --bg-light: #f4f7fa;         /* Soft background tint from your page */
+      --card-white: #ffffff;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --success-green: #10b981;
     }
 
     * {
@@ -29,560 +29,545 @@
     }
 
     body {
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--light-slate);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      color: var(--slate);
-      letter-spacing: -0.01em;
-    }
-
-    /* Elite Top Compliance Header Row */
-    .compliance-bar {
-      background-color: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 0;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .compliance-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
+    /* Seamless Top Navigation Bar matching albrightloans.com */
+    .nav-header {
+      background-color: var(--brand-navy);
+      color: white;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 12px rgba(10, 25, 47, 0.08);
     }
 
-    .compliance-branding {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--slate);
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
     }
 
-    .compliance-licensing {
-      font-size: 0.8rem;
-      color: var(--text-light);
+    .nav-logo span {
+      color: var(--brand-gold);
+    }
+
+    .nav-nmls {
+      font-size: 0.75rem;
+      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    /* Main Container with subtle depth */
-    .main-wrapper {
-      max-width: 1000px;
-      margin: 3rem auto;
-      background: var(--white);
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
-      border: 1px solid #eef2f6;
+    /* Main Container Split Layout */
+    .hero-funnel-container {
+      max-width: 1140px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-funnel-container {
+        grid-template-columns: 1fr;
+        margin: 1.5rem auto;
+        gap: 2rem;
+      }
+    }
+
+    /* Left Side: Copywriting Content */
+    .left-hero-content h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--brand-navy);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .left-hero-content p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .trust-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .badge-icon {
+      background: var(--brand-navy);
+      color: var(--brand-gold);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    /* Right Side: High-End Interactive Form Card */
+    .funnel-card {
+      background: var(--card-white);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(10, 25, 47, 0.05);
+      border: 1px solid #e2e8f0;
       overflow: hidden;
     }
 
-    /* Premium Progress Integration */
-    .funnel-progress {
-      background-color: var(--light-slate);
-      height: 8px;
+    /* Matching your modern visual progress fill */
+    .progress-timeline {
+      background: #e2e8f0;
+      height: 6px;
       width: 100%;
-      position: relative;
     }
 
-    .progress-fill {
-      background-color: var(--slate);
+    .progress-timeline-fill {
+      background: var(--brand-gold);
       height: 100%;
-      width: 25%; /* Step 1 default */
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 25%;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Responsive Step Layout */
-    .funnel-layout {
-      display: flex;
-      min-height: 550px;
-    }
-
-    .hero-side {
-      flex: 1;
-      background-color: #f8fafc;
+    .funnel-card-body {
       padding: 3rem;
-      border-right: 1px solid var(--border);
     }
 
-    .form-side {
-      flex: 1.2;
-      padding: 3.5rem;
+    @media (max-width: 600px) {
+      .funnel-card-body { padding: 1.75rem; }
     }
 
-    /* Mobile First Adjustments */
-    @media (max-width: 800px) {
-      .funnel-layout { flex-direction: column-reverse; }
-      .hero-side { padding: 2rem; border-right: none; border-top: 1px solid var(--border); }
-      .form-side { padding: 2.5rem; }
+    .step-view { display: none; }
+    .step-view.active { display: block; }
+
+    .step-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--brand-navy);
+      margin-bottom: 0.5rem;
     }
 
-    /* Right Side (Active Form Content) Styling */
-    .funnel-step {
-      display: none;
-    }
-
-    .funnel-step.active {
-      display: block;
-      animation: fadeInSlide 0.4s ease-out;
-    }
-
-    @keyframes fadeInSlide {
-      from { opacity: 0; transform: translateX(10px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .funnel-headline { font-size: 1.7rem; margin-bottom: 0.35rem; }
-    .funnel-subtext { color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; }
-
-    /* Premium Selection Tiles (Step 1) */
-    .selection-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
+    .step-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
       margin-bottom: 2rem;
     }
-    @media (max-width: 600px) { .selection-grid { grid-template-columns: 1fr; } }
 
-    .option-tile {
-      border: 2px solid var(--border);
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.5rem;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .option-tile:hover { border-color: var(--slate); background-color: var(--light-slate); }
-    .option-tile.selected { border-color: var(--slate); background-color: var(--light-slate); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04); }
-
-    .option-tile input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
-    .option-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .option-label { font-weight: 700; color: var(--slate); font-size: 1.05rem; line-height: 1.3; }
-
-    /* Conditional Educational Alert */
-    .edu-alert {
-      background-color: #fffbeb;
-      border-left: 4px solid #f59e0b;
-      padding: 1rem 1.2rem;
-      border-radius: 6px;
-      margin-bottom: 2rem;
-      display: none;
-      align-items: start;
-      gap: 0.75rem;
-    }
-    .edu-alert p { font-size: 0.88rem; color: #78350f; font-weight: 500; }
-
-    /* Numeric Input Framework (Step 2) */
-    .input-group { margin-bottom: 1.75rem; }
-    .input-label { display: block; font-weight: 600; color: var(--slate); font-size: 0.95rem; margin-bottom: 0.25rem; }
-    .input-sublabel { font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.6rem; display: block; }
+    /* Custom Input Row Styles to match your screenshots */
+    .form-field { margin-bottom: 1.5rem; }
     
-    .input-field-wrap { position: relative; display: flex; align-items: center; }
-    .input-prefix-icon { position: absolute; left: 1rem; font-weight: 500; color: #a1a1aa; }
-    input[type="number"], input[type="text"], input[type="email"], select {
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--brand-navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .input-wrapper { position: relative; display: flex; align-items: center; }
+    .input-addon { position: absolute; left: 1rem; color: #94a3b8; font-weight: 600; }
+
+    input[type="text"], input[type="email"], input[type="number"], select {
       width: 100%;
-      padding: 0.9rem 1.1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
       font-family: inherit;
-      color: var(--slate);
       transition: all 0.2s;
     }
-    input[type="number"] { padding-left: 2.2rem; }
-    input:focus, select:focus { outline: none; border-color: var(--slate); box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05); }
+    input[type="number"] { padding-left: 2rem; }
 
-    /* Final State Dashboard (Step 4) */
-    .results-panel {
-      background: var(--light-slate);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.75rem;
-      margin-bottom: 2rem;
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--brand-navy);
+      box-shadow: 0 0 0 3px rgba(10, 25, 47, 0.05);
     }
-    .result-data-row {
+
+    /* Premium Custom Selection Option Cards */
+    .selection-stack { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+    
+    .custom-radio-card {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
     }
-    .result-data-row:last-child { border-bottom: none; }
-    .result-metric-label { font-size: 0.95rem; font-weight: 500; color: #475569; }
-    .result-metric-value { font-size: 1.15rem; font-weight: 800; color: var(--slate); }
+    .custom-radio-card:hover { background-color: #f8fafc; border-color: var(--brand-navy); }
+    .custom-radio-card input { display: none; }
+    
+    .radio-dot {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      position: relative;
+    }
+    
+    .custom-radio-card.selected {
+      border-color: var(--brand-navy);
+      background-color: #f0f4f8;
+      font-weight: 600;
+    }
+    .custom-radio-card.selected .radio-dot { border-color: var(--brand-navy); }
+    .custom-radio-card.selected .radio-dot::after {
+      content: ''; position: absolute; width: 8px; height: 8px;
+      background: var(--brand-navy); border-radius: 50%;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+    }
 
-    /* Action Buttons Architecture */
-    .btn-row { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; }
-    .btn {
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
+    /* Dynamic Matching Notice Block */
+    .info-callout {
+      background: #f0fdf4;
+      border-left: 4px solid var(--success-green);
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #065f46;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    /* Action Grid Controls */
+    .action-row { display: flex; gap: 1rem; margin-top: 2rem; }
+    
+    .action-btn {
+      padding: 0.85rem 1.5rem;
+      border-radius: 6px;
       font-size: 0.95rem;
       font-weight: 600;
-      font-family: 'Open Sans', sans-serif;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
       border: none;
-      display: inline-flex; height: 100%; align-items: center; justify-content: center;
+      font-family: inherit;
+      display: flex; align-items: center; justify-content: center;
     }
-    .btn-prime { background-color: var(--slate); color: var(--white); flex: 2; }
-    .btn-prime:hover { background-color: var(--slate-hover); }
-    .btn-sec { background-color: var(--border); color: var(--text); flex: 1; }
-    .btn-sec:hover { background-color: #cbd5e1; }
-    .btn-cta-reveal { background-color: var(--success); color: var(--white); font-weight: 700; margin-top: 1.5rem; font-size: 1.05rem; }
-    .btn-cta-reveal:hover { background-color: #15803d; }
+    
+    .btn-next { background-color: var(--brand-gold); color: var(--brand-navy); flex: 2; }
+    .btn-next:hover { background-color: var(--brand-gold-hover); }
+    .btn-back { background-color: #e2e8f0; color: var(--text-dark); flex: 1; }
+    .btn-back:hover { background-color: #cbd5e1; }
 
-    /* Right Side Trust / Branding Content (Hero side) */
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    /* Step 4 Dashboard Output Graphics */
+    .dashboard-block {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
     }
-    .hero-pretitle { font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 1rem; }
-    .hero-mainheadline { font-size: 2.3rem; line-height: 1.1; margin-bottom: 1rem; }
-    .hero-subheadline { font-size: 1rem; color: var(--text-light); margin-bottom: 3rem; }
-    .trust-logos {
+    .dashboard-row {
       display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      margin-top: auto;
-      border-top: 1px solid var(--border);
-      padding-top: 2rem;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e2e8f0;
     }
+    .dashboard-row:last-child { border-bottom: none; }
+    .db-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+    .db-value { font-weight: 700; color: var(--brand-navy); }
 
-    /* Equal Housing Logo */
-    .eho-mark {
-      font-size: 0.65rem; color: #a1a1aa; border: 1px solid #e2e8f0; border-radius: 4px; padding: 0.3rem 0.6rem; font-weight: 700; text-transform: uppercase; display: inline-block;
+    .final-cta {
+      display: block;
+      width: 100%;
+      background: var(--brand-navy);
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
+    .final-cta:hover { background: #132b4f; }
   </style>
 </head>
 <body>
 
-  <header class="compliance-bar">
-    <div class="compliance-wrap">
-      <div class="compliance-branding">MARCUS ALBRIGHT</div>
-      <div class="compliance-licensing">
-        Senior Loan Officer | NMLS #1503465 | Loan Factory #320841 | Equal Housing Lender
+  <nav class="nav-header">
+    <div class="nav-logo">Albright<span>Loans</span></div>
+    <div class="nav-nmls">Marcus Albright | NMLS #1503465</div>
+  </nav>
+
+  <main class="hero-funnel-container">
+    
+    <section class="left-hero-content">
+      <h1>Get Pre-Approved for a Home Loan</h1>
+      <p>
+        Don't let rigid corporate banking calculators derail your home purchase strategy. Our customized dynamic scoring engine accurately breaks down your alternative purchasing options in less than 60 seconds.
+      </p>
+      <div class="trust-badge-row">
+        <div class="badge-icon">✓</div>
+        <div class="nav-nmls" style="color: var(--brand-navy); font-weight:700;">2026 Conforming Limits Pre-Loaded</div>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <main class="main-wrapper">
-    <div class="funnel-progress">
-      <div class="progress-fill" id="funnel-bar-fill"></div>
-    </div>
+    <section class="funnel-card">
+      <div class="progress-timeline">
+        <div class="progress-timeline-fill" id="matrix-progress"></div>
+      </div>
 
-    <form id="loan-review-form" onsubmit="return false;">
-      <div class="funnel-layout">
-        
-        <aside class="hero-side">
-          <p class="hero-pretitle">30+ Years Mortgage Expertise</p>
-          <h1 class="hero-mainheadline">Unlock Your Georgia Homebuying Potential</h1>
-          <p class="hero-subheadline">
-            Our priority processing framework reverses traditional bank thinking, calculating your dynamic 2026 purchasing power inside 60 seconds before you connect with Marcus.
-          </p>
-          <div class="trust-logos">
-            <span class="compliance-branding">LF</span>
-            <div class="compliance-licensing">Loan Factory</div>
-            <span class="eho-mark">Equal Housing Lender</span>
-          </div>
-        </aside>
+      <div class="funnel-card-body">
+        <form id="albright-native-funnel" onsubmit="return false;">
 
-        <section class="form-side">
-
-          <div class="funnel-step active" data-step="1">
-            <h2 class="funnel-headline">1. Verify Your Income Structure</h2>
-            <p class="funnel-subtext">Let's determine your baseline qualifying revenue path.</p>
+          <div class="step-view active" data-step="1">
+            <h2 class="step-title">Income Classification</h2>
+            <p class="step-subtitle">How do you primarily receive your qualifying income?</p>
             
-            <div class="selection-grid">
-              <label class="option-tile selected">
-                <input type="radio" name="emp_path" value="w2" checked>
-                <div class="option-icon">📄</div>
-                <div class="option-label">Standard W-2 Employee</div>
+            <div class="selection-stack">
+              <label class="custom-radio-card selected">
+                <input type="radio" name="income_type" value="w2" checked>
+                <div class="radio-dot"></div>
+                <span>Standard W-2 Salary Employee</span>
               </label>
-              
-              <label class="option-tile">
-                <input type="radio" name="emp_path" value="self">
-                <div class="option-icon">🏢</div>
-                <div class="option-label">Self-Employed / 1099 Business Owner</div>
+              <label class="custom-radio-card">
+                <input type="radio" name="income_type" value="self">
+                <div class="radio-dot"></div>
+                <span>Self-Employed / 1099 Business Owner</span>
               </label>
             </div>
-            
-            <div class="edu-alert" id="self-employed-alert">
-              <span class="option-icon" style="font-size: 1.2rem;">💡</span>
-              <p>
-                <strong>Self-Employed Analysis:</strong> We specialize in alternative data parsing, evaluating net business deposits trends or bank-statement averages, protecting your stated income from being penalized by standard business tax write-offs.
-              </p>
+
+            <div class="info-callout" id="self-employed-callout">
+              <strong>Self-Employed Note:</strong> We look closely at total gross deposits and bank statement metrics, keeping write-offs from counting against your true home buying power.
             </div>
 
-            <div class="btn-row">
-              <button type="button" class="btn btn-prime next-step">Check 2026 Qualifications</button>
+            <div class="action-row">
+              <button type="button" class="action-btn btn-next">Check 2026 Limits</button>
             </div>
           </div>
 
-          <div class="funnel-step" data-step="2">
-            <h2 class="funnel-headline">2. Personal Review Snapshot</h2>
-            <p class="funnel-subtext">Provide your estimated volume baseline to parse loan limits.</p>
+          <div class="step-view" data-step="2">
+            <h2 class="step-title">Financial Estimation</h2>
+            <p class="step-subtitle">Provide your estimated monthly profiles.</p>
             
-            <div class="input-group">
-              <label class="input-label" id="income-label-text">Gross Monthly Income</label>
-              <span class="input-sublabel" id="income-hint-text">Your estimated average pre-tax earnings calculation.</span>
-              <div class="input-field-wrap">
-                <span class="input-prefix-icon">$</span>
-                <input type="number" id="stated_income" placeholder="7500" required min="500">
+            <div class="form-field">
+              <label class="form-label" id="dynamic-inc-lbl">Gross Monthly Income</label>
+              <div class="input-wrapper">
+                <span class="input-addon">$</span>
+                <input type="number" id="val_income" placeholder="8,500" required>
               </div>
             </div>
 
-            <div class="input-group">
-              <label class="input-label">Total Monthly Liability Debts</label>
-              <span class="input-sublabel">Cars, student loans, cards, and other personal obligations. Skip rent.</span>
-              <div class="input-field-wrap">
-                <span class="input-prefix-icon">$</span>
-                <input type="number" id="stated_debts" placeholder="350" required min="0">
+            <div class="form-field">
+              <label class="form-label">Total Monthly Debts</label>
+              <div class="input-wrapper">
+                <span class="input-addon">$</span>
+                <input type="number" id="val_debts" placeholder="400" required>
               </div>
             </div>
 
-            <div class="input-group">
-              <label class="input-label">Estimated Credit Score Tier</label>
-              <span class="input-sublabel">Your credit profile baseline changes program requirements.</span>
-              <select id="stated_credit" required>
-                <option value="Excellent 740+">Excellent (740+ FICO)</option>
-                <option value="Good 680-739" selected>Good (680-739 FICO)</option>
-                <option value="Fair 620-679">Fair (620-679 FICO)</option>
-                <option value="Rebuilding <620">Rebuilding (<620 FICO)</option>
+            <div class="form-field">
+              <label class="form-label">Estimated Credit Score Tier</label>
+              <select id="val_credit" required>
+                <option value="740">Excellent (740+ FICO)</option>
+                <option value="700" selected>Good (680-739 FICO)</option>
+                <option value="640">Fair (620-679 FICO)</option>
+                <option value="600">Rebuilding (Below 620)</option>
               </select>
             </div>
 
-            <div class="btn-row">
-              <button type="button" class="btn btn-sec prev-step">Back</button>
-              <button type="button" class="btn btn-prime next-step">Continue</button>
+            <div class="action-row">
+              <button type="button" class="action-btn btn-back">Back</button>
+              <button type="button" class="action-btn btn-next">Continue</button>
             </div>
           </div>
 
-          <div class="funnel-step" data-step="3">
-            <h2 class="funnel-headline">3.Delivery & Local Verification</h2>
-            <p class="funnel-subtext">Where is your target property located inside Georgia?</p>
+          <div class="step-view" data-step="3">
+            <h2 class="step-title">Delivery Options</h2>
+            <p class="step-subtitle">Where should we deliver your final home buying quote asset?</p>
             
-            <div class="input-group">
-              <label class="input-label">Target GA County</label>
-              <select id="ga_county_selector">
-                <option value="Cobb County">Cobb County</option>
-                <option value="Fulton County">Fulton County</option>
-                <option value="Gwinnett County">Gwinnett County</option>
-                <option value="Other GA County">Other GA County</option>
+            <div class="form-field">
+              <label class="form-label">Target GA County</label>
+              <select id="val_county">
+                <option value="Cobb">Cobb County</option>
+                <option value="Fulton">Fulton County</option>
+                <option value="Gwinnett">Gwinnett County</option>
+                <option value="Other">Other Georgia Area</option>
               </select>
             </div>
 
-            <div class="input-group">
-              <label class="input-label">Your Legal Name</label>
-              <input type="text" id="borr_name" placeholder="John Doe" required>
+            <div class="form-field">
+              <label class="form-label">Your Legal Name</label>
+              <input type="text" id="val_name" placeholder="Marcus Albright" required>
             </div>
 
-            <div class="input-group">
-              <label class="input-label">Email Address</label>
-              <span class="input-sublabel">This address is used to deliver a verified copy of your preliminary blueprint and alternative documentation checklist.</span>
-              <input type="email" id="borr_email" placeholder="john@example.com" required>
+            <div class="form-field">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="val_email" placeholder="marcus@albrightloans.com" required>
             </div>
 
-            <div class="btn-row">
-              <button type="button" class="btn btn-sec prev-step">Back</button>
-              <button type="button" class="btn btn-prime" id="submission-capture-btn">Unlock Live Dashboard & Email Quote</button>
+            <div class="action-row">
+              <button type="button" class="action-btn btn-back">Back</button>
+              <button type="button" class="action-btn btn-next" id="gate-submit-trigger" style="background-color: var(--brand-navy); color: white;">Securely Email My Quote & Unlock Live Dashboard</button>
             </div>
           </div>
 
-          <div class="funnel-step" data-step="4">
-            <h2 class="funnel-headline">4. Custom Analysis Framework</h2>
-            <p class="funnel-subtext">Dynamic 2026 data based on safe 45% DTI parameters.</p>
+          <div class="step-view" data-step="4">
+            <h2 class="step-title">Your Scenario Analysis</h2>
+            <p class="step-subtitle">Calculations completed automatically using max 45% DTI guidelines.</p>
             
-            <div class="results-panel">
-              <div class="result-data-row">
-                <span class="result-metric-label">Max Housing Budget (PITI):</span>
-                <span class="result-metric-value" id="dashboard-piti">$0/mo</span>
+            <div class="dashboard-block">
+              <div class="dashboard-row">
+                <span class="db-label">Max Housing Payment Target (PITI):</span>
+                <span class="db-value" id="out-piti">$0/mo</span>
               </div>
-              <div class="result-data-row">
-                <span class="result-metric-label">Estimated GA Buying Power Scale:</span>
-                <span class="result-metric-value" id="dashboard-power">$0 - $0</span>
+              <div class="dashboard-row">
+                <span class="db-label">Estimated GA Purchasing Power:</span>
+                <span class="db-value" id="out-power">$0 - $0</span>
               </div>
-              <div class="result-data-row">
-                <span class="result-metric-label">Loan Limit Conformance Status:</span>
-                <span class="result-metric-value" id="dashboard-limits" style="color: var(--success);">Valid Bounds</span>
+              <div class="dashboard-row">
+                <span class="db-label">2026 Loan Limit Status:</span>
+                <span class="db-value" id="out-limits" style="color: var(--success-green);">Conforming Match</span>
               </div>
             </div>
 
-            <p style="text-align: center; color: var(--text-light); font-size: 0.85rem; line-height: 1.5; padding: 0 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-              <strong>Quote Delivered!</strong> A copy of this preliminary analysis has been sent to your email. Click below to verify these estimates with Marcus Albright inside our official secure processing portal to secure your formal 24-Hour pre-approval letter.
+            <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-bottom: 1.5rem; line-height: 1.4;">
+              🎉 <strong>Quote Dispatched!</strong> A permanent copy of this framework has been sent to your inbox. Transfer your profile directly to Marcus's system to turn this estimate into a formal pre-approval letter.
             </p>
-            
-            <a href="https://yourportal.loanfactory.com/apply" target="_blank" class="btn btn-prime btn-cta-reveal" id="portal-hand-off-link">Secure Official 24-Hour Pre-Approval Letter</a>
+
+            <a href="https://yourportal.loanfactory.com/apply" id="final-portal-hand-off" target="_blank" class="final-cta">Secure Official 24-Hour Pre-Approval Letter</a>
           </div>
 
-        </section>
+        </form>
       </div>
-    </form>
-  </main>
+    </section>
 
-  <footer style="max-width: 1000px; margin: 0 auto; text-align: center; padding: 0 1rem 3rem 1rem; color: var(--text-light); font-size: 0.8rem; line-height: 1.5;">
-    Boilerplate Verification Notice: The calculated numbers function strictly as automated estimation profiles dependent upon desktop underwriting (DU) or comprehensive credit pulling approvals by an official underwriter. Preliminary results do not constitute a formal loan commitment. Marcus Albright (NMLS 1503465) | Equal Housing Opportunity.
-  </footer>
+  </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const formSteps = Array.from(document.querySelectorAll(".funnel-step"));
-      const barFill = document.getElementById("funnel-bar-fill");
-      let activeStepIndex = 0;
+      const views = Array.from(document.querySelectorAll(".step-view"));
+      const bar = document.getElementById("matrix-progress");
+      let currentIdx = 0;
 
-      // Premium Selection Tile Logic
-      const tiles = document.querySelectorAll(".option-tile");
-      tiles.forEach(tile => {
-        tile.addEventListener("click", function() {
-          tiles.forEach(t => t.classList.remove("selected"));
+      // Handle custom radio styling
+      const radioCards = document.querySelectorAll(".custom-radio-card");
+      radioCards.forEach(card => {
+        card.addEventListener("click", function() {
+          radioCards.forEach(c => c.classList.remove("selected"));
           this.classList.add("selected");
           
           const radioInput = this.querySelector('input[type="radio"]');
           radioInput.checked = true;
 
-          const selfEduNote = document.getElementById("self-employed-alert");
-          const incTitle = document.getElementById("income-label-text");
-          const incHint = document.getElementById("income-hint-text");
+          const callout = document.getElementById("self-employed-callout");
+          const incLbl = document.getElementById("dynamic-inc-lbl");
 
           if (radioInput.value === "self") {
-            selfEduNote.style.display = "flex";
-            incTitle.textContent = "Estimated Net Monthly Revenue";
-            incSub.textContent = "Your total monthly business revenue minus direct operating costs constraints.";
+            callout.style.display = "block";
+            incLbl.textContent = "Estimated Net Monthly Revenue (Deposits)";
           } else {
-            selfEduNote.style.display = "none";
-            incTitle.textContent = "Gross Monthly Income";
-            incSub.textContent = "Your estimated average pre-tax earnings calculation.";
+            callout.style.display = "none";
+            incLbl.textContent = "Gross Monthly Income";
           }
         });
       });
-      // Correcting edge case: ensure initial tile has visual look
-      document.querySelector(".option-tile input:checked").parentElement.classList.add("selected");
 
-      // Progressive Navigation State Management
-      function updateVisualUI() {
-        formSteps.forEach((step, idx) => step.classList.toggle("active", idx === activeStepIndex));
-        const progressProgress = ((activeStepIndex + 1) / formSteps.length) * 100;
-        barFill.style.width = `${progressProgress}%`;
+      function renderStep() {
+        views.forEach((v, i) => v.classList.toggle("active", i === currentIdx));
+        bar.style.width = `${((currentIdx + 1) / views.length) * 100}%`;
       }
 
-      function validateStepFields() {
-        const activeFields = formSteps[activeStepIndex].querySelectorAll("input[required], select[required]");
-        let validState = true;
-        activeFields.forEach(field => {
-          if (!field.checkValidity()) {
-            field.reportValidity();
-            validState = false;
+      function validateFields() {
+        const inputs = views[currentIdx].querySelectorAll("input[required], select[required]");
+        let isValid = true;
+        inputs.forEach(i => {
+          if (!i.checkValidity()) {
+            i.reportValidity();
+            isValid = false;
           }
         });
-        return validState;
+        return isValid;
       }
 
-      document.querySelectorAll(".next-step").forEach(btn => {
-        btn.addEventListener("click", () => {
-          if (validateStepFields()) {
-            activeStepIndex++;
-            updateVisualUI();
+      document.querySelectorAll(".btn-next").forEach(b => {
+        b.addEventListener("click", () => {
+          if (b.id === "gate-submit-trigger") return; // Handled dynamically below
+          if (validateFields()) {
+            currentIdx++;
+            renderStep();
           }
         });
       });
 
-      document.querySelectorAll(".prev-step").forEach(btn => {
-        btn.addEventListener("click", () => {
-          if (activeStepIndex > 0) {
-            activeStepIndex--;
-            updateVisualUI();
+      document.querySelectorAll(".btn-back").forEach(b => {
+        b.addEventListener("click", () => {
+          if (currentIdx > 0) {
+            currentIdx--;
+            renderStep();
           }
         });
       });
 
-      // ========================================================
-      // SUBMISSION TRIGGER ENGINE (THE GATE CAPTURE EXECUTION)
-      // ========================================================
-      document.getElementById("submission-capture-btn").addEventListener("click", () => {
-        if (!validateStepFields()) return;
+      // Dual-Delivery Submission Action (Step 3 -> Step 4)
+      document.getElementById("gate-submit-trigger").addEventListener("click", () => {
+        if (!validateFields()) return;
 
-        // Collect Final Lead Payload
-        const empPath = document.querySelector('input[name="emp_path"]:checked').value;
-        const incomeVal = parseFloat(document.getElementById("stated_income").value) || 0;
-        const debtVal = parseFloat(document.getElementById("stated_debts").value) || 0;
-        const creditTier = document.getElementById("stated_credit").value;
-        const gaCounty = document.getElementById("ga_county_selector").value;
-        const borrName = document.getElementById("borr_name").value;
-        const borrEmail = document.getElementById("borr_email").value;
+        const income = parseFloat(document.getElementById("val_income").value) || 0;
+        const debts = parseFloat(document.getElementById("val_debts").value) || 0;
+        const credit = document.getElementById("val_credit").value;
+        const name = document.getElementById("val_name").value;
+        const email = document.getElementById("val_email").value;
+        const county = document.getElementById("val_county").value;
+        const empType = document.querySelector('input[name="income_type"]:checked').value;
 
-        // PHASE 1: SILENT WEBHOOK HOOK EXPENDITURE (INSTANT LEAD CAPTURE)
-        // Replace with actual Zapier or CRM Webhook URL to get email/SMS alerts instantly
-        const marcusWebhookEndpoint = "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/"; 
-
-        if (marcusWebhookEndpoint && !marcusWebhookEndpoint.includes("YOUR_WEBHOOK_ID")) {
-          fetch(marcusWebhookEndpoint, {
+        // PHASE 1: BACKGROUND SILENT CAPTURE FETCH
+        const hookUrl = "https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/";
+        if (hookUrl && !hookUrl.includes("YOUR_WEBHOOK_ID")) {
+          fetch(hookUrl, {
             method: "POST",
             mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              funnel_lead_source: "Marcus Albright Elite Funnel",
-              name: borrName,
-              email: borrEmail,
-              profile_type: empPath === "self" ? "Self-Employed/1099 Business Owner" : "Standard W-2 Employee",
-              income_volume: incomeVal,
-              liabilities: debtVal,
-              credit_tier: creditTier,
-              ga_county: gaCounty,
-              timestamp: new Date().toISOString()
-            })
-          }).catch(error => console.log("Silent Redundancy Handled:", error));
+            body: JSON.stringify({ name, email, income, debts, credit, county, empType })
+          });
         }
 
-        // PHASE 2: CALCULATION ENGINE & ON-SCREEN REVEAL EXECUTION
-        const computedMaxPITI = Math.max(0, (incomeVal * 0.45) - debtVal);
-        
-        // Reverse Capitalization (Assumed ~6.5% interest rate landscape for 2026)
-        const factorizationPITI = 0.0073; 
-        const estimatedMaxLoan = computedMaxPITI / factorizationPITI;
-        const baseListingLower = Math.round((estimatedMaxLoan / 0.95) * 0.9);
-        const baseListingUpper = Math.round((estimatedMaxLoan / 0.95) * 1.05);
+        // PHASE 2: CALCULATOR ENGINE MATH EXECUTIONS
+        const maxPITI = Math.max(0, (income * 0.45) - debts);
+        const baselineLoan = maxPITI / 0.0073; 
+        const lowerLimit = Math.round((baselineLoan / 0.95) * 0.9);
+        const upperLimit = Math.round((baselineLoan / 0.95) * 1.05);
 
-        // Map calculation metrics safely to dashboard
-        document.getElementById("dashboard-piti").textContent = `$${Math.round(computedMaxPITI).toLocaleString()}/mo`;
-        document.getElementById("dashboard-power").textContent = `$${Math.round(baseListingLower).toLocaleString()} - $${Math.round(baseListingUpper).toLocaleString()}`;
+        // Map updates straight onto Step 4 Dashboard screen elements
+        document.getElementById("out-piti").textContent = `$${Math.round(maxPITI).toLocaleString()}/mo`;
+        document.getElementById("out-power").textContent = `$${lowerLimit.toLocaleString()} - $${upperLimit.toLocaleString()}`;
 
-        // 2026 Baseline Conforming Limit Alignment ($832,750)
-        const checkElement = document.getElementById("dashboard-limits");
-        if (estimatedMaxLoan > 832750) {
-          checkElement.textContent = "Jumbo Loan Category Required";
-          checkElement.style.color = var(--warning);
+        const limitLabel = document.getElementById("out-limits");
+        if (baselineLoan > 832750) {
+          limitLabel.textContent = "Jumbo Tracking Required";
+          limitLabel.style.color = "#d97706";
         } else {
-          checkElement.textContent = "Fits 2026 Conforming Limits";
-          checkElement.style.color = var(--success);
+          limitLabel.textContent = "Fits 2026 Conforming Baseline";
+          limitLabel.style.color = "var(--success-green)";
         }
 
-        // Advance visual dashboard screen immediately
-        activeStepIndex = 3;
-        updateVisualUI();
+        // Push View Layer to Step 4 On-Screen Reveal Card
+        currentIdx = 3;
+        renderStep();
 
-        // PHSAE 3: Appending parameter payloads to portal destination url
-        const portalCtaLink = document.getElementById("portal-hand-off-link");
-        const realPortalUrl = "https://yourportal.loanfactory.com/apply"; // Ensure actual Loan Factory link here
-        
-        // Appending user details for zero-repetition handoff
-        portalCtaLink.href = `${realPortalUrl}?name=${encodeURIComponent(borrName)}&email=${encodeURIComponent(borrEmail)}&income=${incomeVal}&creditTier=${encodeURIComponent(creditTier)}`;
+        // Parameterize the final Loan Factory link
+        const basePortal = "https://yourportal.loanfactory.com/apply";
+        document.getElementById("final-portal-hand-off").href = `${basePortal}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&income=${income}`;
       });
+
     });
   </script>
 </body>
